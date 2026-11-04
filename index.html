@@ -1,0 +1,190 @@
+<title>Kids Week, Nov 13–20</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: header + legend, then a week of day columns (stacks to a list on phones); each day is an ordered run of colored blocks. */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --fg: #1b2230;
+  --muted: #5d6779;
+  --line: #dde2ea;
+  --work: #3b4a8f;      --work-bg: #e6e9f6;
+  --kids: #b45f06;      --kids-bg: #fcefdc;
+  --free: #2f7a5b;      --free-bg: #e3f2ea;
+  --hand: #8a2f6b;      --hand-bg: #f6e4ef;
+  --tbd: #7a7f8a;       --tbd-bg: #f1f2f4;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12161e; --surface: #1a202b; --fg: #e8ecf3; --muted: #9aa4b6; --line: #2b3342;
+  --work: #a9b6f5; --work-bg: #262e52;
+  --kids: #f2b46a; --kids-bg: #3d2c17;
+  --free: #82d1ad; --free-bg: #18352a;
+  --hand: #e7a0cf; --hand-bg: #3b1f33;
+  --tbd: #a6abb6; --tbd-bg: #242a35;
+  color-scheme: dark;
+}}
+:root[data-theme="dark"] {
+  --bg: #12161e; --surface: #1a202b; --fg: #e8ecf3; --muted: #9aa4b6; --line: #2b3342;
+  --work: #a9b6f5; --work-bg: #262e52;
+  --kids: #f2b46a; --kids-bg: #3d2c17;
+  --free: #82d1ad; --free-bg: #18352a;
+  --hand: #e7a0cf; --hand-bg: #3b1f33;
+  --tbd: #a6abb6; --tbd-bg: #242a35;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 15px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 40px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 22px; }
+header { display: grid; gap: 6px; }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.7rem, 3.5vw, 2.4rem); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.sub { color: var(--muted); margin: 0; max-width: 70ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 3px; }
+
+.week { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; }
+.day { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 10px; display: grid; align-content: start; gap: 8px; min-width: 0; }
+.day.away { }
+.dh { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.dow { font-family: var(--f-display); font-weight: 600; font-size: 1.05rem; }
+.date { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+
+.b { border-radius: 7px; padding: 7px 8px; display: grid; gap: 2px; border-left: 3px solid currentColor; }
+.b .t { font-family: var(--f-mono); font-size: 11.5px; font-variant-numeric: tabular-nums; opacity: .9; }
+.b .w { color: var(--fg); font-size: 13.5px; font-weight: 500; }
+.b .n { color: var(--muted); font-size: 12px; }
+.work { color: var(--work); background: var(--work-bg); }
+.kids { color: var(--kids); background: var(--kids-bg); }
+.free { color: var(--free); background: var(--free-bg); }
+.hand { color: var(--hand); background: var(--hand-bg); }
+.tbd  { color: var(--tbd);  background: var(--tbd-bg); border-left-style: dashed; }
+
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.note h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.05rem; margin: 0 0 6px; }
+.note ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: var(--muted); }
+.note strong { color: var(--fg); font-weight: 600; }
+
+@media (max-width: 1100px) { .week { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 640px)  { .week { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Kids Week, Nov 13–20</h1>
+    <p class="sub">The plan while Luis is in Orlando. Mom sleeps at Luis's apartment Sunday through Thursday nights and leaves for work between 6:30 and 6:40am. The school bus comes at 8:42am and drops off at 3:45pm.</p>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--work)"></i>Work</span>
+      <span><i class="sw" style="background:var(--kids)"></i>Kids with you</span>
+      <span><i class="sw" style="background:var(--hand)"></i>Handoff</span>
+      <span><i class="sw" style="background:var(--free)"></i>Free / sleep</span>
+      <span><i class="sw" style="background:var(--tbd)"></i>Still to confirm</span>
+    </div>
+  </header>
+
+  <section class="week" aria-label="Day by day">
+    <article class="day">
+      <div class="dh"><span class="dow">Fri</span><span class="date">Nov 13</span></div>
+      <div class="b kids"><span class="t">Evening</span><span class="w">Kids sleep at Luis's</span></div>
+      <div class="b work"><span class="t">Night</span><span class="w">Overtime shift</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Sat</span><span class="date">Nov 14</span></div>
+      <div class="b hand"><span class="t">Early morning</span><span class="w">Luis drops kids at his mom's before his flight</span></div>
+      <div class="b hand"><span class="t">After shift</span><span class="w">Pick up kids at Luis's mom's</span></div>
+      <div class="b kids"><span class="t">All day + night</span><span class="w">Kids with you</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Sun</span><span class="date">Nov 15</span></div>
+      <div class="b kids"><span class="t">Morning</span><span class="w">Kids with you</span></div>
+      <div class="b hand"><span class="t">1:00 PM</span><span class="w">Church, then leave kids with Luis's parents</span><span class="n">Grandma has them overnight at Luis's</span></div>
+      <div class="b free"><span class="t">Afternoon</span><span class="w">Rest before work</span></div>
+      <div class="b work"><span class="t">10:00 PM</span><span class="w">Work</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Mon</span><span class="date">Nov 16</span></div>
+      <div class="b work"><span class="t">→ 6:15 AM</span><span class="w">Off work</span></div>
+      <div class="b hand"><span class="t">6:30 AM</span><span class="w">Arrive at Luis's apartment</span><span class="n">Grandma leaves 6:30–6:40</span></div>
+      <div class="b kids"><span class="t">6:30–8:42 AM</span><span class="w">Get kids ready, bus at 8:42</span></div>
+      <div class="b free"><span class="t">8:45 AM–9:45 PM</span><span class="w">Free / sleep</span><span class="n">Grandma meets the 3:45 bus</span></div>
+      <div class="b work"><span class="t">10:00 PM</span><span class="w">Work</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Tue</span><span class="date">Nov 17</span></div>
+      <div class="b work"><span class="t">→ 6:15 AM</span><span class="w">Off work</span></div>
+      <div class="b hand"><span class="t">6:30 AM</span><span class="w">Arrive at Luis's apartment</span></div>
+      <div class="b kids"><span class="t">6:30–8:42 AM</span><span class="w">Get kids ready, bus at 8:42</span></div>
+      <div class="b free"><span class="t">8:45 AM–9:45 PM</span><span class="w">Free / sleep</span><span class="n">Grandma meets the 3:45 bus</span></div>
+      <div class="b work"><span class="t">10:00 PM</span><span class="w">Work</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Wed</span><span class="date">Nov 18</span></div>
+      <div class="b work"><span class="t">→ 6:15 AM</span><span class="w">Off work</span></div>
+      <div class="b hand"><span class="t">6:30 AM</span><span class="w">Arrive at Luis's apartment</span></div>
+      <div class="b kids"><span class="t">6:30–8:42 AM</span><span class="w">Get kids ready, bus at 8:42</span></div>
+      <div class="b free"><span class="t">8:45 AM–3:30 PM</span><span class="w">Sleep</span><span class="n">Short window, about 6½ hours</span></div>
+      <div class="b kids"><span class="t">3:45–8:30 PM</span><span class="w">Meet the bus, kids with you</span></div>
+      <div class="b hand"><span class="t">8:30 PM</span><span class="w">Drop kids at Luis's apartment</span><span class="n">Grandma is waiting</span></div>
+      <div class="b work"><span class="t">10:00 PM</span><span class="w">Work</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Thu</span><span class="date">Nov 19</span></div>
+      <div class="b work"><span class="t">→ 6:15 AM</span><span class="w">Off work</span></div>
+      <div class="b hand"><span class="t">6:30 AM</span><span class="w">Arrive at Luis's apartment</span></div>
+      <div class="b kids"><span class="t">6:30–8:42 AM</span><span class="w">Get kids ready, bus at 8:42</span></div>
+      <div class="b free"><span class="t">8:45 AM–3:30 PM</span><span class="w">Sleep</span><span class="n">Short window, about 6½ hours</span></div>
+      <div class="b kids"><span class="t">3:45–8:30 PM</span><span class="w">Meet the bus, kids with you</span></div>
+      <div class="b hand"><span class="t">8:30 PM</span><span class="w">Drop kids at Luis's apartment</span></div>
+      <div class="b work"><span class="t">10:00 PM</span><span class="w">Work</span></div>
+    </article>
+
+    <article class="day">
+      <div class="dh"><span class="dow">Fri</span><span class="date">Nov 20</span></div>
+      <div class="b work"><span class="t">→ 6:15 AM</span><span class="w">Off work</span></div>
+      <div class="b hand"><span class="t">6:30 AM</span><span class="w">Arrive at Luis's apartment</span></div>
+      <div class="b kids"><span class="t">6:30–8:42 AM</span><span class="w">Get kids ready, bus at 8:42</span></div>
+      <div class="b free"><span class="t">8:45 AM–3:30 PM</span><span class="w">Sleep</span></div>
+      <div class="b kids"><span class="t">3:45 PM</span><span class="w">Meet the bus, kids with you</span></div>
+      <div class="b hand"><span class="t">Before OT</span><span class="w">Take kids to Luis's mom's</span></div>
+      <div class="b work"><span class="t">Time TBD</span><span class="w">Overtime shift</span></div>
+      <div class="b hand"><span class="t">Night</span><span class="w">Luis back, picks up kids at his mom's</span></div>
+    </article>
+  </section>
+
+  <section class="notes">
+    <div class="note">
+      <h2>Every school morning</h2>
+      <ul>
+        <li>Be at Luis's apartment by <strong>6:30 AM</strong>. Grandma has to leave for work by 6:40.</li>
+        <li>Bus pickup is <strong>8:42 AM</strong>.</li>
+      </ul>
+    </div>
+    <div class="note">
+      <h2>Still to confirm</h2>
+      <ul>
+        <li>Can you get from work to Luis's place by 6:30?</li>
+        <li>Friday 11/20: OT start time, which sets when the kids go to Grandma's.</li>
+        <li>Saturday 11/14: what time you'll be at Grandma's to pick up the kids.</li>
+      </ul>
+    </div>
+  </section>
+</div>
